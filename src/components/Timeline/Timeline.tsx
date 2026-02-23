@@ -109,7 +109,7 @@ const Timeline = () => {
               <div className={styles.todaySection}>
                 <div className={styles.sectionHeader}>
                   <h2 className={styles.sectionTitle}>
-                    СЕГОДНЯ И ПРОСРОЧЕННЫЕ
+                    СЬОГОДНI ТА ПРОТЕРМIНОВАНI
                   </h2>
                   <div className={styles.orderCount}>
                     {todayAndOverdue.length}
