@@ -1,7 +1,7 @@
 .main {
   margin-left: auto;
   margin-right: auto;
-  padding: 2rem;
+  padding: 1rem;
   height: 100vh;
   overflow: hidden;
 }
@@ -43,13 +43,80 @@
 }
 
 .timeline {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
   gap: 1.5rem;
   height: calc(100vh - 4rem);
 }
 
+.todaySection {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.futureSection {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: rgba(17, 24, 39, 0.6);
+  border: 2px solid rgb(31, 41, 55);
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 900;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: -0.05em;
+  margin: 0;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+}
+
+.gridContainer::-webkit-scrollbar {
+  width: 10px;
+}
+
+.gridContainer::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.5);
+  border-radius: 5px;
+}
+
+.gridContainer::-webkit-scrollbar-thumb {
+  background: rgba(107, 114, 128, 0.8);
+  border-radius: 5px;
+  border: 2px solid rgba(17, 24, 39, 0.4);
+}
+
+.gridContainer::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 1);
+}
+
+.divider {
+  height: 100%;
+  width: 1px;
+  background: rgba(17, 24, 39, 1);
+}
+
 .dayColumn {
+  flex: 1;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -57,9 +124,10 @@
 
 .dayHeader {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 0.3rem 1rem;
+  padding: 0.5rem 0;
   background-color: rgba(17, 24, 39, 0.6);
   border: 2px solid rgb(31, 41, 55);
   border-radius: 0.75rem;
@@ -68,13 +136,13 @@
 
 .dayInfo {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
 }
 
 .dayName {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
+  line-height: 1;
   font-weight: 900;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   letter-spacing: -0.05em;
@@ -82,19 +150,20 @@
 }
 
 .dayDate {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
+  line-height: 1;
   font-weight: 700;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   color: #d1d5db;
 }
 
 .orderCount {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   color: #9ca3af;
   background-color: rgba(31, 41, 55, 0.8);
-  padding: 0.25rem 0.75rem;
+  padding: 0 0.5rem;
   border-radius: 0.5rem;
 }
 
@@ -127,7 +196,7 @@
 }
 
 .orderCard {
-  height: 250px;
+  height: 220px;
   position: relative;
   border-radius: 0.5rem;
   padding: 0.5rem;
@@ -208,7 +277,12 @@
 }
 
 .trackingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
   text-align: center;
+  white-space: nowrap;
 }
 
 .trackingHeader {
@@ -224,9 +298,33 @@
 }
 
 .trackingCode {
-  font-size: 2rem;
+  font-size: 1.25rem;
+  line-height: 1;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-weight: 700;
   color: #9ca3af;
   word-break: break-all;
+}
+
+/* Compact card for future days */
+.compactCard {
+  background-color: rgba(17, 24, 39, 0.4);
+  border: 2px solid rgb(31, 41, 55);
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  animation: fadeIn 0.3s ease-out both;
+}
+
+.compactCard:hover {
+  border-color: rgb(55, 65, 81);
+  transform: translateY(-2px);
+  background-color: rgba(17, 24, 39, 0.6);
+}
+
+.compactOrderId {
+  font-size: 1.75rem;
+  font-weight: 900;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-align: center;
+  letter-spacing: -0.05em;
 }
