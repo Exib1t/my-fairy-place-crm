@@ -13,3 +13,15 @@ export function useOrders() {
     refetchInterval: 10000,
   });
 }
+
+export function useTimeline() {
+  return useQuery<KeyCrmOrder[]>({
+    queryKey: ["timeline"],
+    queryFn: async () => {
+      const response = await OrdersApi.getTimeline();
+
+      return response.data;
+    },
+    refetchInterval: 10000,
+  });
+}

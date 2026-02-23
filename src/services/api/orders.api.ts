@@ -9,6 +9,10 @@ class OrdersApi extends BaseApi {
   getAll() {
     return this._get<KeyCrmOrder[]>("");
   }
+
+  getTimeline() {
+    return this._get<KeyCrmOrder[]>("timeline");
+  }
 }
 
 export default new OrdersApi();
