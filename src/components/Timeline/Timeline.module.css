@@ -44,7 +44,7 @@
 
 .timeline {
   display: flex;
-  gap: 1.5rem;
+  gap: 0.5rem;
   height: calc(100vh - 4rem);
 }
 
@@ -327,4 +327,33 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   text-align: center;
   letter-spacing: -0.05em;
+}
+
+/* Today column highlight */
+.dayColumnToday {
+  background-color: rgba(59, 130, 246, 0.05);
+  border-radius: 0.75rem;
+}
+
+.dayColumnToday .dayHeader {
+  background-color: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+/* New order cards with green border */
+.orderCardNew {
+  border-color: rgba(34, 197, 94, 0.6) !important;
+  background-color: rgba(17, 24, 39, 0.4);
+}
+
+.orderCardNew:hover {
+  border-color: rgba(34, 197, 94, 0.8) !important;
+}
+
+.compactCardNew {
+  border-color: rgba(34, 197, 94, 0.6) !important;
+}
+
+.compactCardNew:hover {
+  border-color: rgba(34, 197, 94, 0.8) !important;
 }

@@ -56,13 +56,16 @@ const Timeline = () => {
     };
 
     orders.forEach((order) => {
+      const dayOfWeek = getDayOfWeek(order.shipping_date);
+
+      // Add to todayAndOverdue section if order is today or overdue
       if (isToday(order.shipping_date) || isOverdue(order.shipping_date)) {
         todayAndOverdue.push(order);
-      } else {
-        const dayOfWeek = getDayOfWeek(order.shipping_date);
-        if (dayOfWeek >= 1 && dayOfWeek <= 7) {
-          futureDays[dayOfWeek as keyof typeof futureDays].push(order);
-        }
+      }
+
+      // Also add to future days column if it's not overdue
+      if (!isOverdue(order.shipping_date) && dayOfWeek >= 1 && dayOfWeek <= 7) {
+        futureDays[dayOfWeek as keyof typeof futureDays].push(order);
       }
     });
 
@@ -80,6 +83,12 @@ const Timeline = () => {
       day: "2-digit",
       month: "2-digit",
     });
+  };
+
+  const isTodayColumn = (dayOfWeek: number) => {
+    const today = new Date();
+    const currentDay = today.getDay() === 0 ? 7 : today.getDay();
+    return dayOfWeek === currentDay;
   };
 
   const dayNames = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
@@ -109,7 +118,7 @@ const Timeline = () => {
               <div className={styles.todaySection}>
                 <div className={styles.sectionHeader}>
                   <h2 className={styles.sectionTitle}>
-                    СЬОГОДНI ТА ПРОТЕРМIНОВАНI
+                    СЬОГОДНI ТА ПРОТЕРМIНОВАННI
                   </h2>
                   <div className={styles.orderCount}>
                     {todayAndOverdue.length}
@@ -118,11 +127,12 @@ const Timeline = () => {
                 <div className={styles.gridContainer}>
                   {todayAndOverdue.map((order) => {
                     const overdue = isOverdue(order.shipping_date);
+                    const isNewOrder = order.status === "Новий";
 
                     return (
                       <div
                         key={order.id}
-                        className={`${styles.orderCard} ${overdue ? styles.orderCardOverdue : ""}`}
+                        className={`${styles.orderCard} ${overdue ? styles.orderCardOverdue : ""} ${isNewOrder ? styles.orderCardNew : ""}`}
                       >
                         {/* Background Image */}
                         {order.product_image && (
@@ -176,9 +186,13 @@ const Timeline = () => {
                 {Object.entries(futureDays).map(([day, orders]) => {
                   const dayNumber = parseInt(day);
                   const dayDate = getDateForDayOfWeek(dayNumber);
+                  const isCurrentDay = isTodayColumn(dayNumber);
 
                   return (
-                    <div key={day} className={styles.dayColumn}>
+                    <div
+                      key={day}
+                      className={`${styles.dayColumn} ${isCurrentDay ? styles.dayColumnToday : ""}`}
+                    >
                       <div className={styles.dayHeader}>
                         <div className={styles.dayInfo}>
                           <h2 className={styles.dayName}>
@@ -190,13 +204,19 @@ const Timeline = () => {
                       </div>
 
                       <div className={styles.ordersContainer}>
-                        {orders.map((order) => (
-                          <div key={order.id} className={styles.compactCard}>
-                            <div className={styles.compactOrderId}>
-                              {order.id}
+                        {orders.map((order) => {
+                          const isNewOrder = order.status === "Новий";
+                          return (
+                            <div
+                              key={order.id}
+                              className={`${styles.compactCard} ${isNewOrder ? styles.compactCardNew : ""}`}
+                            >
+                              <div className={styles.compactOrderId}>
+                                {order.id}
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
                   );
