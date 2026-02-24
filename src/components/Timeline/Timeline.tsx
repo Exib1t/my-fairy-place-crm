@@ -1,230 +1,43 @@
 "use client";
 
-import Image from "next/image";
-import { KeyCrmOrder } from "@/entities/orders/models";
+import { ErrorMessage } from "@/components/common/ErrorMessage/ErrorMessage";
+import { LoadingSpinner } from "@/components/common/LoadingSpinner/LoadingSpinner";
 import { useTimeline } from "@/entities/orders/queries";
-import novaPost from "../../assets/images/nova-post.png";
-import styles from "./Timeline.module.css";
+import { FutureSection } from "./FutureSection/FutureSection";
+import { useGroupedOrders } from "./hooks";
+import { TodaySection } from "./TodaySection/TodaySection";
+
+import "./Timeline.css";
 
 const Timeline = () => {
   const { data, isLoading, error } = useTimeline();
 
-  const getDayOfWeek = (dateString: string | null): number => {
-    if (!dateString) return -1;
-    const date = new Date(dateString);
-    const day = date.getDay();
-    return day === 0 ? 7 : day; // Convert Sunday (0) to 7
-  };
+  const { todayAndOverdue, futureDays } = useGroupedOrders(data);
 
-  const formatDate = (dateString: string | null) => {
-    if (!dateString) return null;
-    const date = new Date(dateString);
-    return date.toLocaleDateString("ru-RU", {
-      day: "2-digit",
-      month: "2-digit",
-    });
-  };
+  if (isLoading) {
+    return <LoadingSpinner fullscreen />;
+  }
 
-  const isOverdue = (shippingDate: string | null) => {
-    if (!shippingDate) return false;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const shipping = new Date(shippingDate);
-    shipping.setHours(0, 0, 0, 0);
-    return shipping < today;
-  };
+  if (error) {
+    return <ErrorMessage fullscreen />;
+  }
 
-  const isToday = (shippingDate: string | null) => {
-    if (!shippingDate) return false;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const shipping = new Date(shippingDate);
-    shipping.setHours(0, 0, 0, 0);
-    return shipping.getTime() === today.getTime();
-  };
-
-  const groupOrdersByCategory = (orders: KeyCrmOrder[]) => {
-    const todayAndOverdue: KeyCrmOrder[] = [];
-    const futureDays = {
-      1: [] as KeyCrmOrder[], // Monday
-      2: [] as KeyCrmOrder[], // Tuesday
-      3: [] as KeyCrmOrder[], // Wednesday
-      4: [] as KeyCrmOrder[], // Thursday
-      5: [] as KeyCrmOrder[], // Friday
-      6: [] as KeyCrmOrder[], // Saturday
-      7: [] as KeyCrmOrder[], // Sunday
-    };
-
-    orders.forEach((order) => {
-      const dayOfWeek = getDayOfWeek(order.shipping_date);
-
-      // Add to todayAndOverdue section if order is today or overdue
-      if (isToday(order.shipping_date) || isOverdue(order.shipping_date)) {
-        todayAndOverdue.push(order);
-      }
-
-      // Also add to future days column if it's not overdue
-      if (!isOverdue(order.shipping_date) && dayOfWeek >= 1 && dayOfWeek <= 7) {
-        futureDays[dayOfWeek as keyof typeof futureDays].push(order);
-      }
-    });
-
-    return { todayAndOverdue, futureDays };
-  };
-
-  const getDateForDayOfWeek = (dayOfWeek: number) => {
-    const today = new Date();
-    const currentDay = today.getDay() === 0 ? 7 : today.getDay(); // Convert Sunday (0) to 7
-    const diff = dayOfWeek - currentDay;
-    const targetDate = new Date(today);
-    targetDate.setDate(today.getDate() + diff);
-
-    return targetDate.toLocaleDateString("ru-RU", {
-      day: "2-digit",
-      month: "2-digit",
-    });
-  };
-
-  const isTodayColumn = (dayOfWeek: number) => {
-    const today = new Date();
-    const currentDay = today.getDay() === 0 ? 7 : today.getDay();
-    return dayOfWeek === currentDay;
-  };
-
-  const dayNames = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
+  if (!data || data.length === 0) {
+    return null;
+  }
 
   return (
-    <main className={styles.main}>
-      {isLoading && (
-        <div className={styles.loader}>
-          <div className={styles.spinner} />
-        </div>
-      )}
+    <main className="timeline-main">
+      <div className="timeline-container">
+        {/* Left side: Today & Overdue orders */}
+        <TodaySection orders={todayAndOverdue} />
 
-      {error && (
-        <div className={styles.errorContainer}>
-          <p className={styles.errorText}>ERROR</p>
-        </div>
-      )}
+        {/* Divider */}
+        <div className="timeline-divider" />
 
-      {data &&
-        data.length > 0 &&
-        (() => {
-          const { todayAndOverdue, futureDays } = groupOrdersByCategory(data);
-          const today = new Date().toLocaleDateString();
-          return (
-            <div className={styles.timeline}>
-              {/* Left side: Today & Overdue orders in grid */}
-              <div className={styles.todaySection}>
-                <div className={styles.sectionHeader}>
-                  <h2 className={styles.sectionTitle}>
-                    {today}
-                  </h2>
-                  <div className={styles.orderCount}>
-                    {todayAndOverdue.length}
-                  </div>
-                </div>
-                <div className={styles.gridContainer}>
-                  {todayAndOverdue.map((order) => {
-                    const overdue = isOverdue(order.shipping_date);
-                    const isNewOrder = order.status === "Новий";
-
-                    return (
-                      <div
-                        key={order.id}
-                        className={`${styles.orderCard} ${overdue ? styles.orderCardOverdue : ""} ${isNewOrder ? styles.orderCardNew : ""}`}
-                      >
-                        {/* Background Image */}
-                        {order.product_image && (
-                          <div
-                            className={styles.backgroundImage}
-                            style={{
-                              backgroundImage: `url(${order.product_image})`,
-                            }}
-                          />
-                        )}
-
-                        <div className={styles.cardContent}>
-                          {/* Order ID */}
-                          <div className={styles.orderId}>
-                            <div className={styles.orderIdText}>{order.id}</div>
-                          </div>
-
-                          {/* Child name */}
-                          <div className={styles.childName}>
-                            <div className={styles.childNameText}>
-                              {order.child_name ?? "-"}
-                            </div>
-                          </div>
-
-                          {/* Tracking Number */}
-                          {order.tracking_code && (
-                            <div className={styles.trackingContainer}>
-                              <div className={styles.trackingHeader}>
-                                <Image
-                                  src={novaPost}
-                                  alt={"Nova post"}
-                                  width={20}
-                                />
-                              </div>
-                              <div className={styles.trackingCode}>
-                                {order.tracking_code}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className={styles.divider} />
-
-              {/* Right side: Future days in columns */}
-              <div className={styles.futureSection}>
-                {Object.entries(futureDays).map(([day, orders]) => {
-                  const dayNumber = parseInt(day);
-                  const dayDate = getDateForDayOfWeek(dayNumber);
-                  const isCurrentDay = isTodayColumn(dayNumber);
-
-                  return (
-                    <div
-                      key={day}
-                      className={`${styles.dayColumn} ${isCurrentDay ? styles.dayColumnToday : ""}`}
-                    >
-                      <div className={styles.dayHeader}>
-                        <div className={styles.dayInfo}>
-                          <h2 className={styles.dayName}>
-                            {dayNames[dayNumber - 1]}
-                          </h2>
-                          <div className={styles.dayDate}>{dayDate}</div>
-                        </div>
-                        <div className={styles.orderCount}>{orders.length}</div>
-                      </div>
-
-                      <div className={styles.ordersContainer}>
-                        {orders.map((order) => {
-                          const isNewOrder = order.status === "Новий";
-                          return (
-                            <div
-                              key={order.id}
-                              className={`${styles.compactCard} ${isNewOrder ? styles.compactCardNew : ""}`}
-                            >
-                              <div className={styles.compactOrderId}>
-                                {order.id}
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })()}
+        {/* Right side: Future days */}
+        <FutureSection futureDays={futureDays} />
+      </div>
     </main>
   );
 };

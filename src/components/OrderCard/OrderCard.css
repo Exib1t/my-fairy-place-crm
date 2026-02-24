@@ -1,0 +1,208 @@
+/* Order Card Base Styles */
+.order-card {
+  position: relative;
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 2px solid var(--color-card-border);
+  transition: all 0.3s;
+  background-color: var(--color-card-bg);
+  overflow: hidden;
+}
+
+.order-card:hover {
+  border-color: var(--color-card-border-hover);
+  transform: translateY(-2px);
+}
+
+/* Variant: Large (for OrdersList) */
+.order-card-large {
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+/* Variant: Medium (for Timeline TodaySection) */
+.order-card-medium {
+  height: 220px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+/* Overdue State */
+.order-card-overdue {
+  background-color: var(--color-overdue-bg);
+  border-color: var(--color-overdue-border);
+}
+
+.order-card-overdue:hover {
+  border-color: var(--color-overdue-border-hover);
+}
+
+/* New Order State */
+.order-card-new {
+  border-color: var(--color-new-border);
+}
+
+.order-card-new:hover {
+  border-color: var(--color-new-border-hover);
+}
+
+/* Manufactured Order State */
+.order-card-manufactured {
+  border-color: var(--color-manufactured-border);
+}
+
+.order-card-manufactured:hover {
+  border-color: var(--color-manufactured-border-hover);
+}
+
+.order-card-tick {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15rem;
+  color: rgba(34, 197, 94, 0.6);
+  z-index: 10;
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+}
+
+.order-card-tick::before {
+  content: "✓";
+  font-weight: 900;
+}
+
+/* Background Image */
+.order-card-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Content Container */
+.order-card-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Order ID */
+.order-card-id {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.order-card-large .order-card-id {
+  margin-bottom: 1.5rem;
+}
+
+.order-card-medium .order-card-id {
+  margin-bottom: 0.75rem;
+}
+
+.order-card-id-text {
+  font-size: 6rem;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  letter-spacing: -0.05em;
+}
+
+.order-card-large .order-card-id-text {
+  font-size: 6rem;
+  line-height: 1;
+}
+
+.order-card-medium .order-card-id-text {
+  font-size: 5rem;
+  line-height: 1;
+}
+
+/* Child Name */
+.order-card-child-name {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.order-card-medium .order-card-child-name {
+  margin-bottom: 0.75rem;
+}
+
+.order-card-child-name-text {
+  font-size: 1.875rem;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  letter-spacing: -0.05em;
+}
+
+.order-card-medium .order-card-child-name-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+/* Shipping Date */
+.order-card-date {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.order-card-date-text {
+  font-size: 1.875rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-text-gray-300);
+}
+
+.order-card-date-overdue {
+  color: var(--color-overdue-text);
+}
+
+/* Tracking Code */
+.order-card-tracking {
+  text-align: center;
+}
+
+.order-card-medium .order-card-tracking {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.order-card-tracking-header {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text-gray-500);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.order-card-medium .order-card-tracking-header {
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  margin-bottom: 0;
+}
+
+.order-card-tracking-code {
+  font-size: 1.5rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-text-gray-400);
+}
+
+.order-card-medium .order-card-tracking-code {
+  font-size: 1.25rem;
+  line-height: 1;
+  word-break: break-all;
+}

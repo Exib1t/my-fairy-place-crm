@@ -1,0 +1,22 @@
+.loading-spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 0;
+}
+
+.loading-spinner-fullscreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loading-spinner {
+  width: 6rem;
+  height: 6rem;
+  border: 4px solid var(--foreground);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}

@@ -1,0 +1,71 @@
+.day-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.day-column-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  background-color: rgba(17, 24, 39, 0.6);
+  border: 2px solid var(--color-card-border);
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.day-column-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.day-column-name {
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: 900;
+  font-family: var(--font-mono), serif;
+  letter-spacing: -0.05em;
+  margin: 0;
+}
+
+.day-column-date {
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: 700;
+  font-family: var(--font-mono), serif;
+  color: var(--color-text-gray-300);
+}
+
+.day-column-count {
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-mono), serif;
+  color: var(--color-text-gray-400);
+  background-color: rgba(31, 41, 55, 0.8);
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.day-column-orders {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+}
+
+/* Today Column Highlight */
+.day-column-today {
+  background-color: var(--color-today-bg);
+  border-radius: 0.75rem;
+}
+
+.day-column-today .day-column-header {
+  background-color: var(--color-today-header-bg);
+  border-color: var(--color-today-border);
+}

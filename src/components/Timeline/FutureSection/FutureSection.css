@@ -1,0 +1,6 @@
+.future-section {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+  min-width: 0;
+}

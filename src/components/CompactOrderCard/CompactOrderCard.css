@@ -1,0 +1,29 @@
+.compact-order-card {
+  background-color: var(--color-card-bg);
+  border: 2px solid var(--color-card-border);
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  animation: fadeIn 0.3s ease-out both;
+}
+
+.compact-order-card:hover {
+  border-color: var(--color-card-border-hover);
+  transform: translateY(-2px);
+  background-color: rgba(17, 24, 39, 0.6);
+}
+
+.compact-order-card-new {
+  border-color: var(--color-new-border);
+}
+
+.compact-order-card-new:hover {
+  border-color: var(--color-new-border-hover);
+}
+
+.compact-order-card-id {
+  font-size: 1.75rem;
+  font-weight: 900;
+  font-family: var(--font-mono), serif;
+  text-align: center;
+  letter-spacing: -0.05em;
+}
