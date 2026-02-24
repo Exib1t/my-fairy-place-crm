@@ -111,14 +111,14 @@ const Timeline = () => {
         data.length > 0 &&
         (() => {
           const { todayAndOverdue, futureDays } = groupOrdersByCategory(data);
-
+          const today = new Date().toLocalDateString();
           return (
             <div className={styles.timeline}>
               {/* Left side: Today & Overdue orders in grid */}
               <div className={styles.todaySection}>
                 <div className={styles.sectionHeader}>
                   <h2 className={styles.sectionTitle}>
-                    СЬОГОДНI ТА ПРОТЕРМIНОВАННI
+                    {today}
                   </h2>
                   <div className={styles.orderCount}>
                     {todayAndOverdue.length}
