@@ -41,4 +41,5 @@
   overflow-y: auto;
   overflow-x: hidden;
   flex: 1;
+  align-content: start;
 }
