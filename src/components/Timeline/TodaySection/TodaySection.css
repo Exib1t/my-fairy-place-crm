@@ -28,7 +28,7 @@
   font-size: 1.5rem;
   font-weight: 700;
   font-family: var(--font-mono);
-  color: var(--color-text-white-400);
+  color: var(--color-text-gray-300);
   background-color: rgba(31, 41, 55, 0.8);
   padding: 0 0.5rem;
   border-radius: 0.5rem;
