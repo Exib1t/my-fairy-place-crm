@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import QueryClientProvider from "@/app/QueryClientProvider";
+import AuthScreen from "@/components/AuthScreen/AuthScreen";
+
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,7 +20,6 @@ export const metadata: Metadata = {
   description: "Advanced order management and tracking system",
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryClientProvider>
-          {children}
+          <AuthScreen>{children}</AuthScreen>
         </QueryClientProvider>
       </body>
     </html>

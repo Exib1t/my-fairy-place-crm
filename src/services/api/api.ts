@@ -1,10 +1,17 @@
-import axios, {
-  type AxiosRequestConfig,
-  type AxiosResponse,
-} from "axios";
+import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
+});
+
+api.interceptors.request.use((req) => {
+  const accessToken = localStorage.getItem("api_key");
+
+  if (accessToken) {
+    req.headers.set("Authorization", `Bearer ${JSON.parse(accessToken)}`);
+  }
+
+  return req;
 });
 
 export class BaseApi {
