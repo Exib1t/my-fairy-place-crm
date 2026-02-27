@@ -12,7 +12,7 @@ export function useChangeOrderStatus() {
     },
     onSuccess: async (_data, _variables, _onMutateResult, context) => {
       await context.client.invalidateQueries({
-        queryKey: ["orders", "timeline"],
+        queryKey: ["timeline"],
       });
     },
   });
