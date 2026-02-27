@@ -36,6 +36,7 @@ const AuthScreen: FC<PropsWithChildren> = ({ children }) => {
         placeholder="api_key"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        autoFocus
       />
       <button type={"button"} onClick={onSubmit}>
         Submit
