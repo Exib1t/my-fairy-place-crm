@@ -51,6 +51,10 @@ export const OrderCard = memo(
         {isManufacturedOrder && <div className={"order-card-tick"} />}
 
         <div className="order-card-content">
+          {/* Source name */}
+
+          <div className="order-card-source">{order.source_name}</div>
+
           {/* Order ID */}
           <div className="order-card-id">
             <div className="order-card-id-text">{order.id}</div>
