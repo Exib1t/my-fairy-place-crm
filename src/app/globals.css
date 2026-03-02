@@ -20,6 +20,10 @@
   --color-today-header-bg: rgba(59, 130, 246, 0.2);
   --color-today-border: rgba(59, 130, 246, 0.4);
 
+  --color-weekend-bg: rgba(200, 63, 63, 0.1);
+  --color-weekend-header-bg: rgba(246, 59, 59, 0.2);
+  --color-weekend-border: rgba(246, 59, 59, 0.4);
+
   /* Card colors */
   --color-card-bg: rgba(17, 24, 39, 0.4);
   --color-card-border: rgb(31, 41, 55);

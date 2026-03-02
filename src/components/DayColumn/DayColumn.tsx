@@ -13,7 +13,13 @@ interface DayColumnProps {
 
 export const DayColumn = memo(
   ({ dayName, dayDate, orders, isToday = false }: DayColumnProps) => {
-    const columnClasses = ["day-column", isToday && "day-column-today"]
+    const isWeekend = dayName === "ВС" || dayName === "СБ";
+
+    const columnClasses = [
+      "day-column",
+      isToday && "day-column-today",
+      isWeekend && "day-column-weekend",
+    ]
       .filter(Boolean)
       .join(" ");
 

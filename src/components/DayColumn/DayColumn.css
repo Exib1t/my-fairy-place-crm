@@ -69,3 +69,14 @@
   background-color: var(--color-today-header-bg);
   border-color: var(--color-today-border);
 }
+
+/* Weekend Column Highlight */
+.day-column-weekend {
+  background-color: var(--color-weekend-bg);
+  border-radius: 0.75rem;
+}
+
+.day-column-weekend .day-column-header {
+  background-color: var(--color-weekend-header-bg);
+  border-color: var(--color-weekend-border);
+}

@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import { ErrorMessage } from "@/components/common/ErrorMessage/ErrorMessage";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner/LoadingSpinner";
 import { useExtendedGroupedOrders } from "@/components/Timeline/hooks";
-import { TodaySection } from "@/components/Timeline/TodaySection/TodaySection";
 import { useChangeOrderStatus } from "@/entities/orders/mutations";
 import { useExtendedTimeline } from "@/entities/orders/queries";
 import { ExtendedFutureSection } from "./ExtendedFutureSection/ExtendedFutureSection";
@@ -14,7 +13,7 @@ import "@/components/Timeline/Timeline.css";
 const ExtendedTimeline = () => {
   const { data, isLoading, error } = useExtendedTimeline();
 
-  const { todayAndOverdue, futureDays } = useExtendedGroupedOrders(data);
+  const { futureDays } = useExtendedGroupedOrders(data);
 
   const { mutateAsync: changeStatus } = useChangeOrderStatus();
 

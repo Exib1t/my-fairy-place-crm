@@ -1,4 +1,5 @@
 .compact-order-card {
+  position: relative;
   background-color: var(--color-card-bg);
   border: 2px solid var(--color-card-border);
   border-radius: 0.5rem;
@@ -34,4 +35,22 @@
   font-family: var(--font-mono), serif;
   text-align: center;
   letter-spacing: -0.05em;
+}
+
+.order-card-tick-compact {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: rgba(34, 197, 94, 1);
+  z-index: 10;
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+}
+
+.order-card-tick-compact::before {
+  content: "✓";
+  font-weight: 900;
 }

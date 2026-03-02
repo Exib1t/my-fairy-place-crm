@@ -9,6 +9,7 @@ interface CompactOrderCardProps {
 
 export const CompactOrderCard = memo(({ order }: CompactOrderCardProps) => {
   const isNewOrder = order.status === ORDER_STATUS.NEW;
+  const isManufacturedOrder = order.status === ORDER_STATUS.MANUFACTURED;
 
   const isOverdue = order.shipping_date
     ? new Date(order.shipping_date) < new Date()
@@ -24,6 +25,7 @@ export const CompactOrderCard = memo(({ order }: CompactOrderCardProps) => {
 
   return (
     <div className={cardClasses}>
+      {isManufacturedOrder && <div className={"order-card-tick-compact"} />}
       <div className="compact-order-card-id">{order.id}</div>
     </div>
   );
