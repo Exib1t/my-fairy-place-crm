@@ -12,6 +12,14 @@
   background-color: rgba(17, 24, 39, 0.6);
 }
 
+.compact-order-card-overdue {
+  border-color: var(--color-error);
+}
+
+.compact-order-card-overdue:hover {
+  border-color: var(--color-error);
+}
+
 .compact-order-card-new {
   border-color: var(--color-new-border);
 }

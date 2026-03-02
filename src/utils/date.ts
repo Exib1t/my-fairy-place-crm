@@ -143,3 +143,49 @@ export const parseDate = (dateString: string | null): Date | null => {
   const date = new Date(dateString);
   return resetTime(date);
 };
+
+/**
+ * Get date for specific number of days from today
+ * @param daysFromToday - Number of days from today (0 = today, 1 = tomorrow, etc.)
+ * @param locale - Locale string (default: 'ru-RU')
+ * @returns Formatted date string (dd/mm)
+ */
+export const getDateFromToday = (
+  daysFromToday: number,
+  locale: string = 'ru-RU'
+): string => {
+  const today = new Date();
+  const targetDate = new Date(today);
+  targetDate.setDate(today.getDate() + daysFromToday);
+
+  return targetDate.toLocaleDateString(locale, {
+    day: '2-digit',
+    month: '2-digit',
+  });
+};
+
+/**
+ * Get day name for specific number of days from today
+ * @param daysFromToday - Number of days from today (0 = today, 1 = tomorrow, etc.)
+ * @returns Day name in short Ukrainian format (ПН, ВТ, СР, ЧТ, ПТ, СБ, ВС)
+ */
+export const getDayNameFromToday = (daysFromToday: number): string => {
+  const dayNames = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
+  const today = new Date();
+  const targetDate = new Date(today);
+  targetDate.setDate(today.getDate() + daysFromToday);
+
+  const dayOfWeek = targetDate.getDay();
+  const adjustedDay = dayOfWeek === 0 ? 6 : dayOfWeek - 1; // Convert Sunday (0) to 6, Monday (1) to 0, etc.
+
+  return dayNames[adjustedDay];
+};
+
+/**
+ * Check if given number of days from today is today
+ * @param daysFromToday - Number of days from today
+ * @returns true if daysFromToday is 0, false otherwise
+ */
+export const isTodayByDaysOffset = (daysFromToday: number): boolean => {
+  return daysFromToday === 0;
+};

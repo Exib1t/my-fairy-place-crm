@@ -14,6 +14,10 @@ class OrdersApi extends BaseApi {
     return this._get<KeyCrmOrder[]>("timeline");
   }
 
+  getExtendedTimeline() {
+    return this._get<KeyCrmOrder[]>("extended-timeline");
+  }
+
   changeStatus(bodyParams: ChangeStatusDto) {
     return this._post<KeyCrmOrder, ChangeStatusDto>(
       "change-status",

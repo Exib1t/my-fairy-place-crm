@@ -25,3 +25,15 @@ export function useTimeline() {
     refetchInterval: 10000,
   });
 }
+
+export function useExtendedTimeline() {
+  return useQuery<KeyCrmOrder[]>({
+    queryKey: ["extended-timeline"],
+    queryFn: async () => {
+      const response = await OrdersApi.getExtendedTimeline();
+
+      return response.data;
+    },
+    refetchInterval: 10000,
+  });
+}

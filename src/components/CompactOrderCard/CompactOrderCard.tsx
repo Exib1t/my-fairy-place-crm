@@ -10,9 +10,14 @@ interface CompactOrderCardProps {
 export const CompactOrderCard = memo(({ order }: CompactOrderCardProps) => {
   const isNewOrder = order.status === ORDER_STATUS.NEW;
 
+  const isOverdue = order.shipping_date
+    ? new Date(order.shipping_date) < new Date()
+    : false;
+
   const cardClasses = [
     "compact-order-card",
     isNewOrder && "compact-order-card-new",
+    isOverdue && "compact-order-card-overdue",
   ]
     .filter(Boolean)
     .join(" ");

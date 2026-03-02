@@ -1,0 +1,38 @@
+.navigation {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.navigation-container {
+  display: flex;
+  gap: 2rem;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.navigation-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.navigation-link:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.navigation-link.active {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}

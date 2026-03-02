@@ -1,0 +1,7 @@
+.extended-future-section {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  gap: 1rem;
+  flex: 1;
+  overflow-x: auto;
+}

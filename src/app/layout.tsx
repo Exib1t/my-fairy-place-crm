@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import QueryClientProvider from "@/app/QueryClientProvider";
 import AuthScreen from "@/components/AuthScreen/AuthScreen";
+import Navigation from "@/components/Navigation/Navigation";
 
 import "./globals.css";
 
@@ -31,7 +32,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryClientProvider>
-          <AuthScreen>{children}</AuthScreen>
+          <AuthScreen>
+            {/*<Navigation />*/}
+            {children}
+          </AuthScreen>
         </QueryClientProvider>
       </body>
     </html>
