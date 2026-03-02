@@ -1,4 +1,8 @@
-import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
+import axios, {
+  type AxiosError,
+  type AxiosRequestConfig,
+  type AxiosResponse,
+} from "axios";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -13,6 +17,20 @@ api.interceptors.request.use((req) => {
 
   return req;
 });
+
+api.interceptors.response.use(
+  (res) => {
+    return res;
+  },
+  (err: AxiosError) => {
+    if (err.status === 401) {
+      localStorage.removeItem("api_key");
+      window.location.reload();
+    }
+
+    throw err;
+  },
+);
 
 export class BaseApi {
   protected baseUrl: string;

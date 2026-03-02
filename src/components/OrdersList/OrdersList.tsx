@@ -15,7 +15,7 @@ const OrdersList = () => {
   }
 
   if (error) {
-    return <ErrorMessage />;
+    return <ErrorMessage fullscreen />;
   }
 
   if (!data || data.length === 0) {
