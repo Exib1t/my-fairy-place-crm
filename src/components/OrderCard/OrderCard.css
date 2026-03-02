@@ -162,7 +162,7 @@
 .order-card-source {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-text-gray-300);
+  color: white;
 }
 
 .order-card-date-overdue {

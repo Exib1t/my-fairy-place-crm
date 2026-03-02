@@ -9,7 +9,11 @@ interface TodaySectionProps {
 }
 
 export const TodaySection = memo(({ orders }: TodaySectionProps) => {
-  const today = new Date().toLocaleDateString();
+  const today = new Date().toLocaleDateString("uk-UA", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   return (
     <div className="today-section">
