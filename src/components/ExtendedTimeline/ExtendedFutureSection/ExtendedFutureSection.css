@@ -5,3 +5,9 @@
   flex: 1;
   overflow-x: auto;
 }
+
+@media (max-width: 768px) {
+  .extended-future-section {
+    gap: 0.1rem;
+  }
+}

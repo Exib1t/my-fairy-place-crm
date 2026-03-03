@@ -1,10 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ErrorMessage } from "@/components/common/ErrorMessage/ErrorMessage";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner/LoadingSpinner";
 import { useExtendedGroupedOrders } from "@/components/Timeline/hooks";
-import { useChangeOrderStatus } from "@/entities/orders/mutations";
 import { useExtendedTimeline } from "@/entities/orders/queries";
 import { ExtendedFutureSection } from "./ExtendedFutureSection/ExtendedFutureSection";
 
@@ -15,36 +14,22 @@ const ExtendedTimeline = () => {
 
   const { futureDays } = useExtendedGroupedOrders(data);
 
-  const { mutateAsync: changeStatus } = useChangeOrderStatus();
-
-  const [orderId, setOrderId] = useState<string>("");
-
-  const handleKeyPress = useCallback(
-    (e: KeyboardEvent) => {
-      const pressedKey = e.key;
-
-      if (pressedKey === "Enter") {
-        if (!Number.isNaN(orderId)) {
-          changeStatus({
-            order_id: Number(orderId),
-            status_id: 7,
-          }).finally(() => setOrderId(""));
-        }
-        return;
+  const lockToLandscape = async () => {
+    if (screen.orientation && "lock" in screen.orientation) {
+      try {
+        await (screen.orientation?.lock as (type: string) => Promise<void>)(
+          "landscape",
+        );
+        console.log("Screen orientation locked to landscape");
+      } catch (err) {
+        console.error("Orientation lock failed:", err);
       }
-
-      setOrderId(orderId + pressedKey);
-    },
-    [orderId, changeStatus],
-  );
+    }
+  };
 
   useEffect(() => {
-    window.addEventListener("keypress", handleKeyPress);
-
-    return () => {
-      window.removeEventListener("keypress", handleKeyPress);
-    };
-  }, [handleKeyPress]);
+    lockToLandscape();
+  });
 
   if (isLoading) {
     return <LoadingSpinner fullscreen />;

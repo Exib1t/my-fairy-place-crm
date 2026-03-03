@@ -1,10 +1,19 @@
 .compact-order-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   background-color: var(--color-card-bg);
   border: 2px solid var(--color-card-border);
   border-radius: 0.5rem;
   transition: all 0.2s;
   animation: fadeIn 0.3s ease-out both;
+}
+
+@media (max-width: 768px) {
+  .compact-order-card {
+    padding-block: 0.2rem;
+  }
 }
 
 .compact-order-card:hover {
@@ -35,6 +44,13 @@
   font-family: var(--font-mono), serif;
   text-align: center;
   letter-spacing: -0.05em;
+}
+
+@media (max-width: 768px) {
+  .compact-order-card-id {
+    font-size: 1rem;
+    writing-mode: sideways-rl;
+  }
 }
 
 .order-card-tick-compact {

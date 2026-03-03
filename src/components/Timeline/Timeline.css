@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .timeline-main {
+    padding: 0.25rem;
+  }
+}
+
 .timeline-container {
   display: flex;
   gap: 0.5rem;
