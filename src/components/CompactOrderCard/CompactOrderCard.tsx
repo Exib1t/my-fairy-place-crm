@@ -11,8 +11,10 @@ export const CompactOrderCard = memo(({ order }: CompactOrderCardProps) => {
   const isNewOrder = order.status === ORDER_STATUS.NEW;
   const isManufacturedOrder = order.status === ORDER_STATUS.MANUFACTURED;
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
   const isOverdue = order.shipping_date
-    ? new Date(order.shipping_date) < new Date()
+    ? new Date(order.shipping_date) < today
     : false;
 
   const cardClasses = [
