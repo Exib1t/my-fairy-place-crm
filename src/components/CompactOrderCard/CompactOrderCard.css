@@ -48,8 +48,7 @@
 
 @media (max-width: 768px) {
   .compact-order-card-id {
-    font-size: 1rem;
-    writing-mode: sideways-rl;
+    font-size: 0.6rem;
   }
 }
 
@@ -58,7 +57,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 2rem;
+  font-size: 1rem;
   color: rgba(34, 197, 94, 1);
   z-index: 10;
   pointer-events: none;

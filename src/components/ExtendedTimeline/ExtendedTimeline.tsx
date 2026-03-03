@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { ErrorMessage } from "@/components/common/ErrorMessage/ErrorMessage";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner/LoadingSpinner";
 import { useExtendedGroupedOrders } from "@/components/Timeline/hooks";
@@ -13,23 +12,6 @@ const ExtendedTimeline = () => {
   const { data, isLoading, error } = useExtendedTimeline();
 
   const { futureDays } = useExtendedGroupedOrders(data);
-
-  const lockToLandscape = async () => {
-    if (screen.orientation && "lock" in screen.orientation) {
-      try {
-        await (screen.orientation?.lock as (type: string) => Promise<void>)(
-          "landscape",
-        );
-        console.log("Screen orientation locked to landscape");
-      } catch (err) {
-        console.error("Orientation lock failed:", err);
-      }
-    }
-  };
-
-  useEffect(() => {
-    lockToLandscape();
-  });
 
   if (isLoading) {
     return <LoadingSpinner fullscreen />;

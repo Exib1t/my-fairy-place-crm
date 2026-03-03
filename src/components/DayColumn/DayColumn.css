@@ -56,20 +56,17 @@
 @media (max-width: 768px) {
   .day-column-name {
     font-size: 1rem;
-    writing-mode: sideways-rl;
     margin-bottom: 8px;
   }
 
   .day-column-date {
-    font-size: 1rem;
-    writing-mode: sideways-rl;
+    font-size: 0.5rem;
     margin-bottom: 8px;
   }
 
   .day-column-count {
     font-size: 1rem;
     padding: 0 0.1rem;
-    aspect-ratio: 1 / 1;
   }
 }
 
