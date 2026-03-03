@@ -4,6 +4,8 @@
   --background: #000000;
   --foreground: #ffffff;
 
+  --primary: #793bf6;
+
   /* Order status colors */
   --color-overdue-bg: rgba(69, 10, 10, 0.3);
   --color-overdue-border: rgba(153, 27, 27, 0.5);
@@ -115,4 +117,8 @@ body {
 
 .font-mono {
   font-family: var(--font-mono);
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
