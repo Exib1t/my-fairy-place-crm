@@ -190,92 +190,96 @@
   word-break: break-word;
 }
 
-/* Products */
-.dialog-products {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
-}
-
-@media (min-width: 768px) {
-  .dialog-products {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .dialog-products {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-/* Attachments */
-.dialog-attachments {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.dialog-product {
-  display: flex;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  background: rgba(17, 24, 39, 0.6);
+/* Products Table */
+.dialog-products-table-wrapper {
+  overflow-x: auto;
   border-radius: 0.5rem;
   border: 1px solid var(--color-card-border);
-  transition: border-color 0.2s;
 }
 
-.dialog-product:hover {
-  border-color: var(--color-card-border-hover);
-}
-
-.dialog-product-image {
-  flex-shrink: 0;
-  width: 50px;
-  height: 50px;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.dialog-product-image img {
+.dialog-products-table {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  border-collapse: collapse;
+  font-size: 0.875rem;
 }
 
-.dialog-product-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.375rem;
+.dialog-products-table thead {
+  background: rgba(17, 24, 39, 0.8);
+}
+
+.dialog-products-table th {
+  padding: 0.625rem 0.75rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-card-border);
+  white-space: nowrap;
+}
+
+.dialog-products-table td {
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid var(--color-card-border);
+  vertical-align: top;
+  color: var(--color-text-gray-300);
+}
+
+.dialog-products-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dialog-products-table tbody tr {
+  background: rgba(17, 24, 39, 0.4);
+  transition: background 0.2s;
+}
+
+.dialog-products-table tbody tr:hover {
+  background: rgba(17, 24, 39, 0.7);
+}
+
+.dialog-table-num {
+  text-align: center;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--color-text-gray-500);
+  width: 2.5rem;
+}
+
+.dialog-table-image {
+  width: 4rem;
+}
+
+.dialog-table-name {
+  min-width: 10rem;
+}
+
+.dialog-table-qty {
+  text-align: center;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  width: 3rem;
+}
+
+.dialog-table-comment {
+  min-width: 8rem;
+  font-style: italic;
+  color: var(--color-text-gray-400);
 }
 
 .dialog-product-name {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--foreground);
   line-height: 1.3;
-}
-
-.dialog-product-quantity {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-text-gray-400);
-}
-
-.dialog-product-comment {
-  font-size: 0.8rem;
-  color: var(--color-text-gray-400);
-  font-style: italic;
 }
 
 .dialog-product-properties {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  margin-top: 0.25rem;
+  margin-top: 0.375rem;
 }
 
 .dialog-product-property {
@@ -291,6 +295,13 @@
 
 .dialog-property-value {
   color: var(--color-text-gray-300);
+}
+
+/* Attachments */
+.dialog-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 /* Close Button */
@@ -334,14 +345,6 @@
   .dialog-info-grid {
     grid-template-columns: 1fr;
     gap: 0.75rem;
-  }
-
-  .dialog-products {
-    grid-template-columns: 1fr;
-  }
-
-  .dialog-product {
-    flex-direction: row;
   }
 
   .dialog-close {

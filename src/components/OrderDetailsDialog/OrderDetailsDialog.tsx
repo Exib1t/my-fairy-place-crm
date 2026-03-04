@@ -116,48 +116,62 @@ export const OrderDetailsDialog = memo(
                 {order.products && order.products.length > 0 && (
                   <section className="dialog-section">
                     <h3 className="dialog-section-title">Товари</h3>
-                    <div className="dialog-products">
-                      {order.products.map((product) => (
-                        <div key={product.id} className="dialog-product">
-                          {product.thumbnail && (
-                            <ImagePreview
-                              src={product.thumbnail}
-                              alt={product.name}
-                            />
-                          )}
-                          <div className="dialog-product-info">
-                            <div className="dialog-product-name">
-                              {product.name}
-                            </div>
-                            <div className="dialog-product-quantity">
-                              Кількість: {product.quantity}
-                            </div>
-                            {product.comment && (
-                              <div className="dialog-product-comment">
-                                {product.comment}
-                              </div>
-                            )}
-                            {product.properties &&
-                              product.properties.length > 0 && (
-                                <div className="dialog-product-properties">
-                                  {product.properties.map((prop, idx) => (
-                                    <div
-                                      key={idx}
-                                      className="dialog-product-property"
-                                    >
-                                      <span className="dialog-property-name">
-                                        {prop.name}:
-                                      </span>
-                                      <span className="dialog-property-value">
-                                        {prop.value}
-                                      </span>
+                    <div className="dialog-products-table-wrapper">
+                      <table className="dialog-products-table">
+                        <thead>
+                          <tr>
+                            <th>№</th>
+                            <th>Зображення</th>
+                            <th>Назва товару</th>
+                            <th>Шт.</th>
+                            <th>Коментар</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {order.products.map((product, index) => (
+                            <tr key={product.id}>
+                              <td className="dialog-table-num">{index + 1}</td>
+                              <td className="dialog-table-image">
+                                {product.thumbnail && (
+                                  <ImagePreview
+                                    src={product.thumbnail}
+                                    alt={product.name}
+                                  />
+                                )}
+                              </td>
+                              <td className="dialog-table-name">
+                                <span className="dialog-product-name">
+                                  {product.name}
+                                </span>
+                                {product.properties &&
+                                  product.properties.length > 0 && (
+                                    <div className="dialog-product-properties">
+                                      {product.properties.map((prop, idx) => (
+                                        <div
+                                          key={idx}
+                                          className="dialog-product-property"
+                                        >
+                                          <span className="dialog-property-name">
+                                            {prop.name}:
+                                          </span>
+                                          <span className="dialog-property-value">
+                                            {prop.value}
+                                          </span>
+                                        </div>
+                                      ))}
                                     </div>
-                                  ))}
-                                </div>
-                              )}
-                          </div>
-                        </div>
-                      ))}
+                                  )}
+                              </td>
+                              <td className="dialog-table-qty">
+                                {product.quantity}
+                              </td>
+                              <td className="dialog-table-comment">
+                                {product.comment || "—"}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   </section>
                 )}
