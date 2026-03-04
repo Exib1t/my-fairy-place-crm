@@ -1,4 +1,5 @@
-import { memo } from "react";
+import { memo, useState } from "react";
+import { OrderDetailsDialog } from "@/components/OrderDetailsDialog/OrderDetailsDialog";
 import type { KeyCrmOrder } from "@/entities/orders/models";
 import { ORDER_STATUS } from "@/utils/constants";
 import "./CompactOrderCard.css";
@@ -8,6 +9,7 @@ interface CompactOrderCardProps {
 }
 
 export const CompactOrderCard = memo(({ order }: CompactOrderCardProps) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const isNewOrder = order.status === ORDER_STATUS.NEW;
   const isManufacturedOrder = order.status === ORDER_STATUS.MANUFACTURED;
 
@@ -26,10 +28,20 @@ export const CompactOrderCard = memo(({ order }: CompactOrderCardProps) => {
     .join(" ");
 
   return (
-    <div className={cardClasses}>
-      {isManufacturedOrder && <div className={"order-card-tick-compact"} />}
-      <div className="compact-order-card-id">{order.id}</div>
-    </div>
+    <>
+      <div className={cardClasses} onClick={() => setIsDialogOpen(true)}>
+        {isManufacturedOrder && <div className={"order-card-tick-compact"} />}
+        <div className="compact-order-card-id">{order.id}</div>
+      </div>
+
+      {isDialogOpen && (
+        <OrderDetailsDialog
+          orderId={order.id}
+          open={isDialogOpen}
+          onOpenChange={setIsDialogOpen}
+        />
+      )}
+    </>
   );
 });
 

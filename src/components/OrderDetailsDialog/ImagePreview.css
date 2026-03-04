@@ -1,0 +1,62 @@
+/* Image Preview Thumbnail */
+.image-preview-thumbnail {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--color-card-border);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.image-preview-thumbnail:hover {
+  border-color: var(--color-card-border-hover);
+  transform: scale(1.05);
+}
+
+.image-preview-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Image Preview Popup */
+.image-preview-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90vw;
+  max-height: 90vh;
+  z-index: 10000;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--color-card-border);
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  animation: imagePreviewFadeIn 0.15s ease-out;
+  pointer-events: none;
+}
+
+@keyframes imagePreviewFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.image-preview-popup img {
+  display: block;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}

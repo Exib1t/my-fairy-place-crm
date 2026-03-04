@@ -8,6 +8,7 @@
   border-radius: 0.5rem;
   transition: all 0.2s;
   animation: fadeIn 0.3s ease-out both;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

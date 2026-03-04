@@ -7,6 +7,7 @@
   transition: all 0.3s;
   background-color: var(--color-card-bg);
   overflow: hidden;
+  cursor: pointer;
 }
 
 .order-card:hover {

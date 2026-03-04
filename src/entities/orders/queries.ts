@@ -37,3 +37,15 @@ export function useExtendedTimeline() {
     refetchInterval: 10000,
   });
 }
+
+export function useOrder(order_id: number) {
+  return useQuery<KeyCrmOrder>({
+    queryKey: ["order", order_id],
+    queryFn: async () => {
+      const response = await OrdersApi.getOne(order_id);
+
+      return response.data;
+    },
+    enabled: !!order_id,
+  });
+}
