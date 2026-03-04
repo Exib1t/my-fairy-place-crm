@@ -28,16 +28,6 @@
   border-radius: 0.5rem;
 }
 
-/* Overdue State */
-.order-card-overdue {
-  background-color: var(--color-overdue-bg);
-  border-color: var(--color-overdue-border);
-}
-
-.order-card-overdue:hover {
-  border-color: var(--color-overdue-border-hover);
-}
-
 /* New Order State */
 .order-card-new {
   border-color: var(--color-new-border);
@@ -54,6 +44,16 @@
 
 .order-card-manufactured:hover {
   border-color: var(--color-manufactured-border-hover);
+}
+
+/* Overdue State */
+.order-card-overdue {
+  background-color: var(--color-overdue-bg);
+  border-color: var(--color-overdue-border);
+}
+
+.order-card-overdue:hover {
+  border-color: var(--color-overdue-border-hover);
 }
 
 .order-card-tick {

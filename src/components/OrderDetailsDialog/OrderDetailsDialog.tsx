@@ -30,10 +30,10 @@ export const OrderDetailsDialog = memo(
           <Dialog.Overlay className="dialog-overlay" />
           <Dialog.Content className="dialog-content">
             <Dialog.Title className="dialog-title">
-              Заказ #{orderId}
+              Замовлення #{orderId}
             </Dialog.Title>
 
-            {isLoading && <div className="dialog-loading">Загрузка...</div>}
+            {isLoading && <div className="dialog-loading">Завантаження...</div>}
 
             {order && (
               <div className="dialog-body">
@@ -50,13 +50,13 @@ export const OrderDetailsDialog = memo(
                     </div>
 
                     <div className="dialog-info-item">
-                      <span className="dialog-label">Источник</span>
+                      <span className="dialog-label">Джерело</span>
                       <span className="dialog-value">{order.source_name}</span>
                     </div>
 
                     {order.shipping_date && (
                       <div className="dialog-info-item">
-                        <span className="dialog-label">Дата отправки</span>
+                        <span className="dialog-label">Дата відправки</span>
                         <span className="dialog-value">
                           {formatDate(order.shipping_date)}
                         </span>
@@ -81,7 +81,7 @@ export const OrderDetailsDialog = memo(
                 {order.custom_fields && order.custom_fields.length > 0 && (
                   <section className="dialog-section">
                     <h3 className="dialog-section-title">
-                      Дополнительная информация
+                      Додаткова інформація
                     </h3>
                     <div className="dialog-custom-fields">
                       {order.custom_fields.map((field, index) => (
@@ -105,7 +105,7 @@ export const OrderDetailsDialog = memo(
                         <ImagePreview
                           key={index}
                           src={attachment}
-                          alt={`Вложение ${index + 1}`}
+                          alt={`Вкладення ${index + 1}`}
                         />
                       ))}
                     </div>
@@ -115,7 +115,7 @@ export const OrderDetailsDialog = memo(
                 {/* Products Section */}
                 {order.products && order.products.length > 0 && (
                   <section className="dialog-section">
-                    <h3 className="dialog-section-title">Товары</h3>
+                    <h3 className="dialog-section-title">Товари</h3>
                     <div className="dialog-products">
                       {order.products.map((product) => (
                         <div key={product.id} className="dialog-product">
@@ -130,7 +130,7 @@ export const OrderDetailsDialog = memo(
                               {product.name}
                             </div>
                             <div className="dialog-product-quantity">
-                              Количество: {product.quantity}
+                              Кількість: {product.quantity}
                             </div>
                             {product.comment && (
                               <div className="dialog-product-comment">
@@ -165,7 +165,7 @@ export const OrderDetailsDialog = memo(
             )}
 
             <Dialog.Close asChild>
-              <button className="dialog-close" aria-label="Закрыть">
+              <button className="dialog-close" aria-label="Закрити">
                 ✕
               </button>
             </Dialog.Close>
