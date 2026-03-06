@@ -72,38 +72,34 @@
 }
 
 /* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
 .loader {
-  width: 50px;
-  aspect-ratio: 1;
-  display: grid;
+  display: inline-flex;
+  gap: 10px;
 }
 .loader:before,
 .loader:after {
   content: "";
-  grid-area: 1 / 1;
+  height: 26px;
+  aspect-ratio: 1;
   border-radius: 50%;
-  background: #f03355;
-  -webkit-mask: repeating-linear-gradient(#000 0 5px, #0000 0 10px);
-  animation: l35 1.5s infinite;
+  background:
+    radial-gradient(farthest-side, #000 95%, #0000) 50% / 8px 8px no-repeat #fff;
+  aspect-ratio: 1;
+  animation: l10 1.5s infinite alternate;
 }
 .loader:after {
-  -webkit-mask: repeating-linear-gradient(#0000 0 5px, #000 0 10px);
   --s: -1;
 }
-@keyframes l35 {
+@keyframes l10 {
   0%,
-  10% {
-    transform: translate(0) rotate(0);
+  20% {
+    transform: scaleX(var(--s, 1)) rotate(0deg);
+    clip-path: inset(0);
   }
-  35% {
-    transform: translate(calc(var(--s, 1) * 50%)) rotate(0);
-  }
-  66% {
-    transform: translate(calc(var(--s, 1) * 50%))
-      rotate(calc(var(--s, 1) * 180deg));
-  }
-  90%,
+  60%,
   100% {
-    transform: translate(0) rotate(calc(var(--s, 1) * 180deg));
+    transform: scaleX(var(--s, 1)) rotate(30deg);
+    clip-path: inset(40% 0 0);
   }
 }
