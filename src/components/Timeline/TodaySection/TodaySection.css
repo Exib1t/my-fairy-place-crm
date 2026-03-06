@@ -24,6 +24,35 @@
   margin: 0;
 }
 
+.today-section-weather {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: rgba(31, 41, 55, 0.8);
+  padding: 0 0.6rem;
+  border-radius: 0.5rem;
+  height: 2rem;
+}
+
+.today-section-weather-emoji {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.today-section-weather-temp {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--color-text-gray-300);
+}
+
+.today-section-weather-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-gray-300);
+  opacity: 0.7;
+}
+
 .today-section-count {
   font-size: 1.5rem;
   font-weight: 700;
