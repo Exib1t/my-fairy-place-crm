@@ -62,7 +62,7 @@ const Timeline = () => {
 
   return (
     <main className="timeline-main">
-      <Galaxy />
+      {/*<Galaxy />*/}
       <div className="timeline-container">
         {/* Left side: Today & Overdue orders */}
         <TodaySection orders={todayAndOverdue} />

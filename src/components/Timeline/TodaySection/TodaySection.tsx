@@ -26,11 +26,15 @@ export const TodaySection = memo(({ orders }: TodaySectionProps) => {
           <div className="today-section-weather">
             <span className="today-section-weather-emoji">{weather.emoji}</span>
             <span className="today-section-weather-temp">
-              {weather.temperature > 0 ? "+" : ""}{weather.temperature}°
+              {weather.temperature > 0 ? "+" : ""}
+              {weather.temperature}°
             </span>
-            <span className="today-section-weather-label">{weather.label} · Сокаль</span>
+            <span className="today-section-weather-label">
+              {weather.label} · Сокаль
+            </span>
           </div>
         )}
+        <div className={"loader"}></div>
         <div className="today-section-count">{orders.length}</div>
       </div>
 
