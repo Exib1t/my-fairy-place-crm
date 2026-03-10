@@ -26,19 +26,29 @@ export function useWeather() {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch(
-      "https://api.open-meteo.com/v1/forecast?latitude=50.4756&longitude=24.2919&current=temperature_2m,weather_code&timezone=Europe%2FKyiv",
-      { signal: controller.signal }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        const temp = Math.round(data.current.temperature_2m);
-        const code = data.current.weather_code;
-        setWeather({ temperature: temp, ...getWeatherInfo(code) });
-      })
-      .catch(() => {/* silently ignore */});
+    const fetchWeather = () => {
+      fetch(
+        "https://api.open-meteo.com/v1/forecast?latitude=50.4756&longitude=24.2919&current=temperature_2m,weather_code&timezone=Europe%2FKyiv",
+        { signal: controller.signal },
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          const temp = Math.round(data.current.temperature_2m);
+          const code = data.current.weather_code;
+          setWeather({ temperature: temp, ...getWeatherInfo(code) });
+        })
+        .catch(() => {
+          /* silently ignore */
+        });
+    };
 
-    return () => controller.abort();
+    fetchWeather();
+    const interval = setInterval(fetchWeather, 10_000);
+
+    return () => {
+      controller.abort();
+      clearInterval(interval);
+    };
   }, []);
 
   return weather;

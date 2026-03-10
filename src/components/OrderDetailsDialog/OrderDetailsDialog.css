@@ -69,6 +69,11 @@
   gap: 2rem;
 }
 
+.dialog-body-container {
+  display: flex;
+  gap: 4rem;
+}
+
 /* Dialog Section */
 .dialog-section {
   display: flex;
@@ -264,7 +269,6 @@
 
 .dialog-table-comment {
   min-width: 8rem;
-  font-style: italic;
   color: var(--color-text-gray-400);
 }
 
