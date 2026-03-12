@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import QueryClientProvider from "@/app/QueryClientProvider";
 import AuthScreen from "@/components/AuthScreen/AuthScreen";
-import Navigation from "@/components/Navigation/Navigation";
 
 import "./globals.css";
 
@@ -17,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mission Control | Orders System",
+  title: "MFP",
   description: "Advanced order management and tracking system",
 };
 
