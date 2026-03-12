@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "MFP",
     short_name: "MFP",
-    start_url: "/",
+    start_url: "/extended-timeline",
     display: "standalone",
     background_color: "#ffffff",
     theme_color: "#000000",
