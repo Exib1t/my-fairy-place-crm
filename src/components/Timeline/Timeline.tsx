@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ErrorMessage } from "@/components/common/ErrorMessage/ErrorMessage";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner/LoadingSpinner";
 import { useChangeOrderStatus } from "@/entities/orders/mutations";
@@ -10,10 +10,9 @@ import { useGroupedOrders } from "./hooks";
 import { TodaySection } from "./TodaySection/TodaySection";
 
 import "./Timeline.css";
-import Galaxy from "@/components/ui/GalaxyBg/GalaxyBg";
 
 const Timeline = () => {
-  const { data, isLoading, error } = useTimeline();
+  const { data = [], isLoading, error } = useTimeline();
 
   const { todayAndOverdue, futureDays } = useGroupedOrders(data);
 
@@ -21,14 +20,30 @@ const Timeline = () => {
 
   const [orderId, setOrderId] = useState<string>("");
 
+  const ttnToOrderIdMap = useMemo(() => {
+    return new Map(data.map((order) => [order.tracking_code, order.id]));
+  }, [data]);
+
+  const orderIdSet = useMemo(() => {
+    return new Set(data.map((order) => order.id));
+  }, [data]);
+
   const handleKeyPress = useCallback(
     (e: KeyboardEvent) => {
       const pressedKey = e.key;
 
       if (pressedKey === "Enter") {
         if (!Number.isNaN(orderId)) {
+          const isTTN = orderId.length === 14;
+
+          const order_id = isTTN
+            ? ttnToOrderIdMap.get(orderId)
+            : Number(orderId);
+
+          if (!order_id || !orderIdSet.has(order_id)) return;
+
           changeStatus({
-            order_id: Number(orderId),
+            order_id: order_id,
             status_id: 7,
           }).finally(() => setOrderId(""));
         }
@@ -37,7 +52,7 @@ const Timeline = () => {
 
       setOrderId(orderId + pressedKey);
     },
-    [orderId, changeStatus],
+    [orderId, changeStatus, ttnToOrderIdMap, orderIdSet],
   );
 
   useEffect(() => {
