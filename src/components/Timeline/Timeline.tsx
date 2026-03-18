@@ -35,6 +35,13 @@ const Timeline = () => {
       if (pressedKey === "Enter") {
         if (!Number.isNaN(orderId)) {
           const isTTN = orderId.length === 14;
+          const isReload = orderId === "00000000";
+
+          if (isReload) {
+            setOrderId("");
+            window.location.reload();
+            return;
+          }
 
           const order_id = isTTN
             ? ttnToOrderIdMap.get(orderId)
