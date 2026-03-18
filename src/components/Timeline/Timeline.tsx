@@ -40,7 +40,7 @@ const Timeline = () => {
             ? ttnToOrderIdMap.get(orderId)
             : Number(orderId);
 
-          if (!order_id || !orderIdSet.has(order_id)) return;
+          if (!order_id || !orderIdSet.has(order_id)) return setOrderId("");
 
           changeStatus({
             order_id: order_id,
