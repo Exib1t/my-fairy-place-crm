@@ -77,21 +77,27 @@ export const useExtendedGroupedOrders = (
     }
 
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const todayDateOnly = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate(),
+    );
 
     orders.forEach((order) => {
-      // Add to todayAndOverdue section if order is today or overdue
       if (isOverdue(order.shipping_date)) {
         futureDays[0].push(order);
       }
 
-      // Add to future days if it's within 14 days and not overdue
       if (!isOverdue(order.shipping_date) && order.shipping_date) {
         const orderDate = new Date(order.shipping_date);
-        orderDate.setHours(0, 0, 0, 0);
+        const orderDateOnly = new Date(
+          orderDate.getFullYear(),
+          orderDate.getMonth(),
+          orderDate.getDate(),
+        );
 
-        const diffTime = orderDate.getTime() - today.getTime();
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const diffTime = orderDateOnly.getTime() - todayDateOnly.getTime();
+        const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
         if (diffDays >= 0 && diffDays < 14) {
           futureDays[diffDays].push(order);
