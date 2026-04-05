@@ -17,8 +17,8 @@ export const DayColumn = memo(
 
     const columnClasses = [
       "day-column",
-      isToday && "day-column-today",
       isWeekend && "day-column-weekend",
+      isToday && "day-column-today",
     ]
       .filter(Boolean)
       .join(" ");
