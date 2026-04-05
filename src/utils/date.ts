@@ -11,12 +11,12 @@
  */
 export const formatDate = (
   dateString: string | null,
-  locale: string = 'ru-RU',
+  locale: string = "ru-RU",
   options: Intl.DateTimeFormatOptions = {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-  }
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  },
 ): string | null => {
   if (!dateString) return null;
   const date = new Date(dateString);
@@ -31,11 +31,11 @@ export const formatDate = (
  */
 export const formatDateShort = (
   dateString: string | null,
-  locale: string = 'ru-RU'
+  locale: string = "ru-RU",
 ): string | null => {
   return formatDate(dateString, locale, {
-    day: '2-digit',
-    month: '2-digit',
+    day: "2-digit",
+    month: "2-digit",
   });
 };
 
@@ -96,7 +96,7 @@ export const getDayOfWeek = (dateString: string | null): number => {
  */
 export const getDateForDayOfWeek = (
   dayOfWeek: number,
-  locale: string = 'ru-RU'
+  locale: string = "ru-RU",
 ): string => {
   const today = new Date();
   const currentDay = today.getDay() === 0 ? 7 : today.getDay();
@@ -106,8 +106,8 @@ export const getDateForDayOfWeek = (
   targetDate.setDate(today.getDate() + diff);
 
   return targetDate.toLocaleDateString(locale, {
-    day: '2-digit',
-    month: '2-digit',
+    day: "2-digit",
+    month: "2-digit",
   });
 };
 
@@ -152,25 +152,25 @@ export const parseDate = (dateString: string | null): Date | null => {
  */
 export const getDateFromToday = (
   daysFromToday: number,
-  locale: string = 'ru-RU'
+  locale: string = "ru-RU",
 ): string => {
   const today = new Date();
   const targetDate = new Date(today);
   targetDate.setDate(today.getDate() + daysFromToday);
 
   return targetDate.toLocaleDateString(locale, {
-    day: '2-digit',
-    month: '2-digit',
+    day: "2-digit",
+    month: "2-digit",
   });
 };
 
 /**
  * Get day name for specific number of days from today
  * @param daysFromToday - Number of days from today (0 = today, 1 = tomorrow, etc.)
- * @returns Day name in short Ukrainian format (ПН, ВТ, СР, ЧТ, ПТ, СБ, ВС)
+ * @returns Day name in short Ukrainian format (ПН, ВТ, СР, ЧТ, ПТ, СБ, НД)
  */
 export const getDayNameFromToday = (daysFromToday: number): string => {
-  const dayNames = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
+  const dayNames = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "НД"];
   const today = new Date();
   const targetDate = new Date(today);
   targetDate.setDate(today.getDate() + daysFromToday);

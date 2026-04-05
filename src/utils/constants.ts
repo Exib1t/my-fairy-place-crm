@@ -3,7 +3,7 @@
  */
 
 /** Ukrainian day names (short format) */
-export const DAY_NAMES = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"] as const;
+export const DAY_NAMES = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "НД"] as const;
 
 /** Default locale for date formatting */
 export const DEFAULT_LOCALE = "ru-RU";
